@@ -2,7 +2,7 @@ require("dotenv").config();
 require("./config/database").connect();
 const express = require("express");
 const User = require("./model/user");
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const auth = require("./middleware/auth");
 const cors = require("cors");
