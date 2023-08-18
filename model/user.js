@@ -11,7 +11,7 @@ const userSchema = new Schema({
   field: { type: String, default: null, required: true, },
   profession: { type: String, default: null, required: true, },
   aboutYou: { type: String, default: null, required: true, },
-  // image: {type: String, required: true, },      
+  image: {type: String, required: true, },      
   token: { type: String },
 });
 
