@@ -7,8 +7,8 @@ const jwt = require('jsonwebtoken');
 const auth = require("./middleware/auth");
 const cors = require("cors");
 const user = require("./model/user");
-const multer = require('multer');
-const cloudinary = require('cloudinary').v2;
+// const multer = require('multer');
+// const cloudinary = require('cloudinary').v2;
 
 
 
@@ -18,26 +18,26 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-//configure cloudinary
-cloudinary.config({
-  cloud_name: process.env.CloudName,
-  api_key: process.env.ApiKey,
-  api_secret: process.env.ApiSecret,
-});
+// //configure cloudinary
+// cloudinary.config({
+  // cloud_name: process.env.CloudName,
+  // api_key: process.env.ApiKey,
+  // api_secret: process.env.ApiSecret,
+// });
 
-const upload = multer({ dest: 'uploads/' });
+// const upload = multer({ dest: 'uploads/' });
 
 // Register
-app.post("/register", upload.single('image'), async (req, res) => {
+app.post("/register", async (req, res) => {
 
     // Our register logic starts here
      try {
       
-      const { firstName, lastName, email, password, field, profession, aboutYou, image} = req.body;
+      const { firstName, lastName, email, password, field, profession, aboutYou} = req.body;
       const result = await cloudinary.uploader.upload(req.file.path);
 
       // Validate user input
-      if (!(email && password && firstName && lastName && field && profession && aboutYou && image )) {
+      if (!(email && password && firstName && lastName && field && profession && aboutYou)) {
         res.status(400).send("All input is required");
       }
   
@@ -61,7 +61,7 @@ app.post("/register", upload.single('image'), async (req, res) => {
         field: field,
         profession: profession,
         aboutYou: aboutYou,
-        image: result.secure_url,
+        // image: result.secure_url,
         // image: image,
       });
   
