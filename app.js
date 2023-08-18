@@ -9,22 +9,24 @@ const cors = require("cors");
 const user = require("./model/user");
 
 
+
+
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+
 
 // Register
 app.post("/register", async (req, res) => {
 
     // Our register logic starts here
      try {
-      // Get user input
-      const { firstName, lastName, email, password, field, profession, aboutYou } = req.body;
       
-        
+      const { firstName, lastName, email, password, field, profession, aboutYou, image } = req.body;
+
       // Validate user input
-      if (!(email && password && firstName && lastName && field && profession && aboutYou)) {
+      if (!(email && password && firstName && lastName && field && profession && aboutYou && image)) {
         res.status(400).send("All input is required");
       }
   
@@ -47,7 +49,8 @@ app.post("/register", async (req, res) => {
         password: encryptedUserPassword,
         field: field,
         profession: profession,
-        aboutYou: aboutYou
+        aboutYou: aboutYou,
+        image: image,
       });
   
       // Create token

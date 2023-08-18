@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
+
 
 //creating a user model
 const userSchema = new Schema({
@@ -10,6 +11,7 @@ const userSchema = new Schema({
   field: { type: String, default: null, required: true, },
   profession: { type: String, default: null, required: true, },
   aboutYou: { type: String, default: null, required: true, },
+  image: {type: String, required: true, },      
   token: { type: String },
 });
 
