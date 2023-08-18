@@ -1,16 +1,11 @@
 require("dotenv").config();
 require("./config/database").connect();
 const express = require("express");
-const User = require("./model/user");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const auth = require("./middleware/auth");
 const cors = require("cors");
 const user = require("./model/user");
-// const multer = require('multer');
-// const cloudinary = require('cloudinary').v2;
-
-
 
 
 const app = express();
@@ -18,14 +13,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// //configure cloudinary
-// cloudinary.config({
-  // cloud_name: process.env.CloudName,
-  // api_key: process.env.ApiKey,
-  // api_secret: process.env.ApiSecret,
-// });
-
-// const upload = multer({ dest: 'uploads/' });
 
 // Register
 app.post("/register", async (req, res) => {
@@ -34,7 +21,6 @@ app.post("/register", async (req, res) => {
      try {
       
       const { firstName, lastName, email, password, field, profession, aboutYou} = req.body;
-      const result = await cloudinary.uploader.upload(req.file.path);
 
       // Validate user input
       if (!(email && password && firstName && lastName && field && profession && aboutYou)) {
@@ -43,7 +29,7 @@ app.post("/register", async (req, res) => {
   
       // check if user already exist
       // Validate if user exist in our database
-      const oldUser = await User.findOne({ email });
+      const oldUser = await user.findOne({ email });
   
       if (oldUser) {
         return res.status(409).send("User Already Exist. Please Login");
@@ -53,7 +39,7 @@ app.post("/register", async (req, res) => {
       encryptedUserPassword = await bcrypt.hash(password, 10);
   
       // Create user in our database
-      const user = await User.create({
+      const user = await user.create({
         first_name: firstName,
         last_name: lastName,
         email: email.toLowerCase(), // sanitize
@@ -61,8 +47,6 @@ app.post("/register", async (req, res) => {
         field: field,
         profession: profession,
         aboutYou: aboutYou,
-        // image: result.secure_url,
-        // image: image,
       });
   
       // Create token
