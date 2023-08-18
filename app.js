@@ -6,6 +6,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const auth = require("./middleware/auth");
 const cors = require("cors");
+const user = require("./model/user");
+
 
 const app = express();
 
@@ -19,7 +21,8 @@ app.post("/register", async (req, res) => {
      try {
       // Get user input
       const { firstName, lastName, email, password, field, profession, aboutYou } = req.body;
-  
+      
+        
       // Validate user input
       if (!(email && password && firstName && lastName && field && profession && aboutYou)) {
         res.status(400).send("All input is required");
@@ -108,5 +111,16 @@ app.post("/register", async (req, res) => {
       app.post("/welcome", auth, (req, res) => {
         res.status(200).send("Welcome to TalentBase 🙌");
       });
+
+    app.get("/api/fetchUsers", async (req, res)=>{
+
+      try {
+        const users = await user.find()
+        res.json(users);
+      } catch (error) {
+        res.json(error);
+      }
+
+    })
     
 module.exports = app;
