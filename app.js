@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const auth = require("./middleware/auth");
 const cors = require("cors");
 const user = require("./model/user");
+const User = require("./model/user");
 
 
 const app = express();
@@ -39,7 +40,7 @@ app.post("/register", async (req, res) => {
       encryptedUserPassword = await bcrypt.hash(password, 10);
   
       // Create user in our database
-      const user = await user.create({
+      const user = await User.create({
         first_name: firstName,
         last_name: lastName,
         email: email.toLowerCase(), // sanitize
