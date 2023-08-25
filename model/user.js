@@ -20,7 +20,11 @@ const userSchema = new Schema({
   password: { type: String, required: true, },
   field: { type: String, default: null, required: true, },
   profession: { type: String, default: null, required: true, },
-  aboutYou: { type: String, default: null, required: true, },   
+  aboutYou: { type: String, default: null, required: true, }, 
+  country: { type: String, default: null, required: true, },
+  state: { type: String, default: null, required: true, }, 
+  location: { type: String, default: null, required: true, },
+  status: { type: String, default: null, required: true, },         
   token: { type: String }
 });
 

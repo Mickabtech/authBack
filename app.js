@@ -9,6 +9,7 @@ const user = require("./model/user");
 const User = require("./model/user");
 
 
+
 const app = express();
 
 app.use(express.json());
@@ -21,10 +22,10 @@ app.post("/register", async (req, res) => {
     // Our register logic starts here
      try {
       
-      const { firstName, lastName, email, password, field, profession, aboutYou} = req.body;
+      const { firstName, lastName, email, password, field, profession, aboutYou, country, state, location, status} = req.body;
 
       // Validate user input
-      if (!(email && password && firstName && lastName && field && profession && aboutYou)) {
+      if (!(email && password && firstName && lastName && field && profession && aboutYou && country && state && location && status)) {
         res.status(400).send("All input is required");
       }
   
@@ -48,6 +49,10 @@ app.post("/register", async (req, res) => {
         field: field,
         profession: profession,
         aboutYou: aboutYou,
+        country: country,
+        state: state,
+        location: location,
+        status: status,
       });
   
       // Create token
@@ -122,5 +127,9 @@ app.post("/register", async (req, res) => {
       }
 
     })
-    
+
+   
+
+
+
 module.exports = app;
