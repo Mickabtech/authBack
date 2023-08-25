@@ -22,10 +22,10 @@ app.post("/register", async (req, res) => {
     // Our register logic starts here
      try {
       
-      const { first_name, last_name, email, password, field, profession, aboutYou, country, state, status,} = req.body;
+      const { first_name, last_name, email, password, field, profession, aboutYou, country, state, status, phoneNumber} = req.body;
 
       // Validate user input
-      if (!(email && password && first_name && last_name && field && profession && aboutYou && country && state && status)) {
+      if (!(email && password && first_name && last_name && field && profession && aboutYou && country && state && status && phoneNumber)) {
         res.status(400).send("All input is required");
       }
   
@@ -42,8 +42,8 @@ app.post("/register", async (req, res) => {
   
       // Create user in our database
       const user = await User.create({
-        first_name: firstName,
-        last_name: lastName,
+        first_name: first_name,
+        last_name: last_name,
         email: email.toLowerCase(), // sanitize
         password: encryptedUserPassword,
         field: field,
@@ -52,6 +52,7 @@ app.post("/register", async (req, res) => {
         country: country,
         state: state,
         status: status,
+        phoneNumber: phoneNumber
       });
   
       // Create token
