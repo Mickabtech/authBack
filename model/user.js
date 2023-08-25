@@ -23,7 +23,6 @@ const userSchema = new Schema({
   aboutYou: { type: String, default: null, required: true, }, 
   country: { type: String, default: null, required: true, },
   state: { type: String, default: null, required: true, }, 
-  location: { type: String, default: null, required: true, },
   status: { type: String, default: null, required: true, },         
   token: { type: String }
 });

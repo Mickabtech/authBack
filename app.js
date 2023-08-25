@@ -22,10 +22,10 @@ app.post("/register", async (req, res) => {
     // Our register logic starts here
      try {
       
-      const { firstName, lastName, email, password, field, profession, aboutYou, country, state, location, status} = req.body;
+      const { firstName, lastName, email, password, field, profession, aboutYou, country, state, status,} = req.body;
 
       // Validate user input
-      if (!(email && password && firstName && lastName && field && profession && aboutYou && country && state && location && status)) {
+      if (!(email && password && firstName && lastName && field && profession && aboutYou && country && state && status)) {
         res.status(400).send("All input is required");
       }
   
@@ -51,7 +51,6 @@ app.post("/register", async (req, res) => {
         aboutYou: aboutYou,
         country: country,
         state: state,
-        location: location,
         status: status,
       });
   
