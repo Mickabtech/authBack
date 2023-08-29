@@ -17,7 +17,7 @@ app.use(cors());
 
 
 // Register
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
 
     // Our register logic starts here
      try {
